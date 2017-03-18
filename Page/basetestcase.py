@@ -6,12 +6,12 @@ import  time,os
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
-
+'''浏览器和app启动页'''
 class BaseTestCase(unittest.TestCase):
 	def setUp(self):
 		self.driver = webdriver.Chrome()
 		self.driver.maximize_window()
-		# self.driver.implicitly_wait(30)
+		self.driver.implicitly_wait(30)
 		self.driver.get('http://172.168.101.83/')
 		time.sleep(2)
 	def tearDown(self):

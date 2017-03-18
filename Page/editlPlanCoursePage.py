@@ -11,6 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 
+'''编辑排课页面'''
 class EditPlanChargePage(WebUI):
     subjectId_loc=(By.XPATH, "//*[@ng-model='OmsCoursePlanVoForEdit.subjectId']")#科目
     selectTeacher_loc=(By.XPATH, "//table[@st-pipe='getCSShooleTeacherByFilters']/tbody/tr/td/input")#选择教师

@@ -10,7 +10,7 @@ from .BasePage import WebUI
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
-
+'''创建班组页面'''
 class CreateGroupPage(WebUI):
     groupName_loc=(By.XPATH, "//input[@placeholder='班组名称']")#班组名称
     orderRule_loc=(By.XPATH,"//*[@id='orderRule']")#课程规则

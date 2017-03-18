@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from model.logConsole import  LogConsole
 import  logging
 from selenium.webdriver.support.wait import WebDriverWait
-
+'''一对一课时排课页面'''
 class SingleCoursePlanHourPage(WebUI):
     selectCourse_loc=(By.XPATH, "//button[@ng-click='showOrderCourseList(detail)']")#选择课程
     courseConfirm_loc=(By.XPATH,"//button[@ng-click='selectOrderCourse()']")#点击课程确认

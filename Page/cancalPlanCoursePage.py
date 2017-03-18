@@ -11,6 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 
+'''消课取消页面'''
 class CancelPlanCoursePage(WebUI):
 
     unSatisfy_loc=(By.XPATH, "//a[contains(text(),'不满意')]']")#不满意

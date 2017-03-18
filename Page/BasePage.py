@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import  By
 # from model.logConsole import  LogConsole
 # import  logging
 import  time as t
+
+'''工厂方法'''
 class Factory(object):
 	def __init__(self,driver):
 		self.driver=driver

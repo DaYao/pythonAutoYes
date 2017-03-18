@@ -12,7 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 
-
+'''删除排课页面'''
 class DeletePlanHourPage(WebUI,BaseLogin):
     subjectId_loc=(By.XPATH, "//*[@name='subjectId']")#选择科目
     radiomultiPlan_loc=(By.XPATH, "//div[@ng-click='checkedShowCycle('week')'/input']")#选择定制排课时间规则

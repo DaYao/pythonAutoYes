@@ -10,6 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 
+'''班组课时排课页面'''
 class multiCoursePlanHourPage(WebUI):
 
     selectCourse01_loc=(By.XPATH, "//*[@id='orderInfo']/tr[1]/td[2]/a")#选择课程

@@ -9,7 +9,7 @@ from .BasePage import WebUI
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
-
+'''班组储值排课页面'''
 class MultiCoursePlanChargePage(WebUI):
     changeTab_loc = (By.XPATH, "//span[@ng-click='showPaikeView(1)']")#切换储值tab
     subjectId_loc=(By.XPATH, "//*[@name='subjectId']")#选择科目

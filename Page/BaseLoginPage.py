@@ -11,13 +11,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import  By
 # from model.logConsole import  LogConsole
-
 # import  logging
 
+
+'''后台公共登录页面'''
 class BaseLogin(unittest.TestCase):
+
     def setUp(self):
-
-
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         # self.driver.implicitly_wait(30)

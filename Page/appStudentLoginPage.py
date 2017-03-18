@@ -8,12 +8,13 @@ from .homePage import HomePage
 from Page.BasePage import AppUI
 import  time as t
 
+'''学生端登录页面'''
 class AppStudentLoginPage(AppUI):
 
 	username_loc=(By.ID,'com.youwinedu.student:id/et_name')
 	password_loc=(By.ID,'com.youwinedu.student:id/et_password')
 	loginButton_loc=(By.ID,'com.youwinedu.student:id/bt_login')
-	loginDiv_loc=(By.ID,'com.taobao.mobile.dipei:id/title_bar_back_button')
+	loginDiv_loc=(By.ID,'com.youwinedu.student:id/title_bar_back_button')
 
 	def getUsername(self,username):
 		self.wait
