@@ -2,7 +2,7 @@ __author__ = 'xueyan'
 # coding:utf-8
 import  unittest
 import sys,os,logging
-BASE_DIR=os.path.dirname(os.path.dirname(__file__))
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(BASE_DIR)
 from Page.BaseLoginPage import BaseLogin
 from Page.homePage import  HomePage

@@ -9,6 +9,7 @@ from .BasePage import WebUI
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
+
 '''一对一储值排课页面'''
 class SingleCoursePlanChargePage(WebUI):
     changeTab_loc = (By.XPATH, "//span[@ng-click='showPaikeView(1)']")#切换储值tab
@@ -143,6 +144,7 @@ class SingleCoursePlanChargePage(WebUI):
     def coursePlan01(self,studentName,teacherName):
         self.docoursePlan(studentName,teacherName)
         return HomePage(self.driver)
+    '''批量排课'''
     def docoursePlan01(self):
         self.getChangeTabField()
         self.getSubjectIdField(2)

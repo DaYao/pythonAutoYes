@@ -2,13 +2,13 @@ __author__ = 'xueyan'
 # coding:utf-8
 import unittest
 import sys, os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(BASE_DIR)
 from Page.BaseLoginPage import BaseLogin
 from Page.homePage import HomePage
 from model import Model
-from Page.singleCoursePlanHourPage import SingleCoursePlanHourPage
-from Page.listeningCoursePlanPage import ListeningCoursePlanPage
+from Page.multiCoursePlanChargePage import MultiCoursePlanChargePage
 # from model.Model import  DataHelper
 from ddt import ddt, data, unpack
 from selenium.webdriver.common.by import By
@@ -23,24 +23,25 @@ from selenium.common.exceptions import NoAlertPresentException
 from  selenium.common.exceptions import NoAlertPresentException
 
 
-class schoolTimeHourCoursePlan60(BaseLogin, HomePage):
-    #通过校区时间表，排课消课
-    #@unittest.skip('test')
-    def testListHourCoursePlan60_001(self):
+class MultiCoursePlan(BaseLogin, MultiCoursePlanChargePage, HomePage):
+    # 通过一对多消课管理列表"排课"按钮进入排课
+    def testMultiCoursePlan_001(self):
         driver = self.driver
         ActionChains(driver).click(driver.find_element_by_xpath("//a[contains(text(),'前台业务')]")).perform()
         self.wait
-        # 点击学生时间表
-        click = driver.find_element_by_xpath("//a[contains(text(),'校区时间表')]")
+        # 点击一对多管理列表
+        click = driver.find_element_by_xpath("//*[@id='CustomerStudentManagement']/li[3]/a")
         ActionChains(driver).click(click).perform()
         self.wait
-        #查询
-        driver.find_element_by_xpath("//*[@id='body']/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[2]/td[2]/ul/li/main/span/p").click()
+        #查询学员姓名
+        driver.find_element_by_xpath("//input[@st-search='myCrmCustomerStudentGroupFilter.group_no']").send_keys("班组储值01")
         self.wait
-        #点击"确定"按钮
-        driver.find_element_by_xpath("//*[@id='body']/div[2]/div[2]/div/div[2]/div[3]/table/tbody/tr[2]/td[2]/ul/li/main/div/ul/div[2]/a[1]").click()
+        #操作列表
+        driver.find_element_by_xpath("//*[@id='nw+0']/span").click()
         self.wait
-        driver.find_element_by_xpath("//button[@class='confirm']").click()
-
+        # 点击班组排课操作
+        driver.find_element_by_xpath("//a[contains(text(),'班组排课')]").click()
+        self.wait
+        self.multiChargeCourse01()
 if __name__ == '__main__':
     unittest.main(verbosity=2)

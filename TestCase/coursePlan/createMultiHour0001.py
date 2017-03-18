@@ -3,7 +3,7 @@ __author__ = 'xueyan'
 import unittest
 import sys, os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(BASE_DIR)
 from Page.BaseLoginPage import BaseLogin
 from Page.homePage import HomePage
