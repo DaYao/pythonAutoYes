@@ -23,7 +23,7 @@ class SingleCoursePlanHourPage(WebUI):
     coefficient_loc=(By.XPATH, "//input[@id='coefficient']")#折算系数
     setingSelectTeacher_loc=(By.XPATH, "//input[@id='timeSearch']")#按时间查询可用老师
     allTeacher_loc=(By.XPATH, "//a[@ng-click='showTeacherList(detail)']")#选择"全部老师"
-    singleTeacher_loc=(By.XPATH, "//a[text()='陈雪薇']")#选择单个老师
+    # singleTeacher_loc=(By.XPATH, "//a[text()='陈雪薇']")#选择单个老师
     radiomultiPlan_loc=(By.XPATH, '''//div[@ng-click="checkedShowCycle('week')"]/input ''')#选择定制排课时间规则
     radioSinglePlan_loc=(By.XPATH, '''//div[@ng-click="checkedShowCycle('day')"]/input ''')#选择精准日期排课
     starttime2_loc=(By.XPATH,"//input[@ng-model='select.time1']")#精准排课选择上课时间时
@@ -46,13 +46,14 @@ class SingleCoursePlanHourPage(WebUI):
     continueCancel_loc=(By.XPATH, "//button[@class='cancel']") # 点击"OK,不继续排课"
 
     def getSelectCourseField(self):
-        self.wait1
+        self.wait
         buttonSe_Click=self.findElement(*self.selectCourse_loc)
         ActionChains(self.driver).click(buttonSe_Click).perform()
-        self.wait1
+        self.wait
     def getCourseConfirmField(self):
-        self.findElement(*self.courseConfirm_loc).click()
-        self.wait1
+        buttonper_Click=self.findElement(*self.courseConfirm_loc)
+        ActionChains(self.driver).click(buttonper_Click).perform()
+        self.wait
     def getSubjectIdField(self, startIndex):
         selectLen = Select(self.findElement(*self.subjectId_loc))
         selectLen.select_by_index(startIndex)
@@ -72,8 +73,12 @@ class SingleCoursePlanHourPage(WebUI):
     def getSetingSelectTeacherField(self):
         self.findElement(*self.setingSelectTeacher_loc).click()
         self.wait
-    def getSingleTeacherField(self):
-        self.findElement(*self.singleTeacher_loc).click()
+    def getSingleTeacherField(self,teacherName):
+        # loc=r"//a[text()='"+teacherName+r"']"
+        loc="//a[text()='自动化教']"
+        singleTeacher_loc=(By.XPATH, loc)#选择单个老师
+        click=self.findElement(*singleTeacher_loc)
+        ActionChains(self.driver).click(click).perform()
         self.wait
     def getAllTeacherField(self):
         self.findElement(*self.allTeacher_loc).click()
@@ -138,11 +143,11 @@ class SingleCoursePlanHourPage(WebUI):
         self.docoursePlan(studentName,teacherName)
         return HomePage(self.driver)
     #批量排课
-    def hourCours01(self):
+    def hourCours01(self,teacherName):
         self.getSelectCourseField()
         self.getCourseConfirmField()
         self.getSubjectIdField(2)
-        self.getSingleTeacherField()
+        self.getSingleTeacherField(teacherName)
         self.getRadiomultiPlanField()
         self.getClickAddTimeField()
         self.getSelectWeekField()
@@ -163,11 +168,11 @@ class SingleCoursePlanHourPage(WebUI):
         self.getContinueCancelField()
         return valiText
     #本周排课
-    def hourCours02(self):
+    def hourCours02(self,teacherName):
         self.getSelectCourseField()
         self.getCourseConfirmField()
         self.getSubjectIdField(2)
-        self.getSingleTeacherField()
+        self.getSingleTeacherField(teacherName)
         self.getRadiomultiPlanField()
         self.getClickAddTimeField()
         self.getSelectWeekField()
@@ -200,11 +205,11 @@ class SingleCoursePlanHourPage(WebUI):
         self.getContinueCancelField()
         return valiText
     #精准排课
-    def hourCours04(self):
+    def hourCours04(self,teacherName):
         self.getSelectCourseField()
         self.getCourseConfirmField()
         self.getSubjectIdField(2)
-        self.getSingleTeacherField()
+        self.getSingleTeacherField(teacherName)
         self.getRadioSingleField()
         startTime =self.getStartDate2Field("2017-11-11")
         self.driver.execute_script(startTime)
