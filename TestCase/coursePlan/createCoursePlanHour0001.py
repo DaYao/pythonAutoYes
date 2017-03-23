@@ -8,6 +8,8 @@ from Page.BaseLoginPage import BaseLogin
 from Page.homePage import  HomePage
 from Page.BasePage import WebUI
 from model import Model
+from model.pyMysqlDB import myDB
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from model.logConsole import  LogConsole
@@ -27,10 +29,13 @@ from selenium.webdriver.support import expected_conditions
 class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
 
     #通过学员管理入口进入排课
-    #@unittest.skip('test')
+    @unittest.skip('test')
     def testHourCoursePlan60_001(self):
         logging.info("-------通过学员管理入口进入排课------")
-        studentName='一对一课时自动01'
+        #数据初始化,新增学员教师
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        studentName='自动化学员'+returnNum
+        teacherName='自动化教师'+returnNum
         driver=self.driver
         ActionChains(driver).click(driver.find_element_by_xpath("//a[contains(text(),'前台业务')]")).perform()
         #学员管理列表
@@ -60,12 +65,17 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
         coursePlan_loc=(By.XPATH,"//*[@id='body']/popup/div/div/div/ul/li[6]/a")
         self.findElement(*coursePlan_loc).click()
         #调用公共一对一排课界面
-        valitext=self.hourCours01()
+        valitext=self.hourCours01(teacherName)
         context_expxcted="排课成功!共排课1次(1小时)"
         self.assertEqual(context_expxcted, valitext)
+        #删除测试数据
+        myDB.connect_function(myDB,'func_del_autoInsertStudent('+returnNum+')')
+
     @unittest.skip('test')
     def testHourCoursePlan60_002(self):
-        studentName='一对一课时自动01'
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        studentName='自动化学员'+returnNum
+        teacherName='自动化教师'+returnNum
         driver=self.driver
         ActionChains(driver).click(driver.find_element_by_xpath("//a[contains(text(),'前台业务')]")).perform()
         self.wait
@@ -85,12 +95,16 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
         # driver.find_element_by_xpath("//a[contains(text(),'排课')]").click()
         self.wait
         #调用公共一对一排课界面
-        valitext=self.hourCours02()
+        valitext=self.hourCours02(teacherName)
         context_expxcted="排课成功!共排课1次(1小时)"
         self.assertEqual(context_expxcted, valitext)
-    @unittest.skip('test')
+        #删除测试数据
+        myDB.connect_function(myDB,'func_del_autoInsertStudent('+returnNum+')')
+    #@unittest.skip('test')
     def testHourCoursePlan60_003(self):
-        studentName='一对一课时自动01'
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        studentName='自动化学员'+returnNum
+        teacherName='自动化教师'+returnNum
         driver=self.driver
         ActionChains(driver).click(driver.find_element_by_xpath("//a[contains(text(),'前台业务')]")).perform()
         self.wait
@@ -110,9 +124,9 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
         # driver.find_element_by_xpath("//a[contains(text(),'排课')]").click()
         self.wait
         #调用公共一对一排课界面
-        valitext=self.hourCours04()
-        context_expxcted="排课成功!共排课1次(1小时)"
+        valitext=self.hourCours04(teacherName)
+        context_expxcted="排课成功!共排课1次(0.5小时)"
         self.assertEqual(context_expxcted, valitext)
-
+        myDB.connect_function(myDB,'func_del_autoInsertStudent('+returnNum+')')
 if __name__=='__main__':
 	unittest.main(verbosity=2)
