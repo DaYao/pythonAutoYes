@@ -29,7 +29,9 @@ class EditPlanChargePage(WebUI):
         self.findElement(*self.selectTeacher_loc).click()
         self.wait
     def getStarTimeField(self, putStarHour):
+        self.wait
         self.findElement(*self.starTime_loc).send_keys(putStarHour)
+
     def getStartLenField(self, startIndex):
         selectLen = Select(self.findElement(*self.startLen_loc))
         selectLen.select_by_index(startIndex)
@@ -48,11 +50,11 @@ class EditPlanChargePage(WebUI):
         self.getSubjectIdField(2)
         self.getSelectTeacherField()
         startValue = '2016-06-21'
-        startTime=self.getPTimeStartField(startValue)
+        startTime=self.getStartDateField(startValue)
         self.driver.execute_script(startTime)
-        self.starTime_loc(12)
-        self.startLen_loc(3)
-        self.SubmitButton_loc()
+        self.getStarTimeField('12')
+        self.getStarTimeField(3)
+        self.getSubmitButtonField()
         valiText=self.getValiTextField()
         return valiText
 if __name__=='__main__':

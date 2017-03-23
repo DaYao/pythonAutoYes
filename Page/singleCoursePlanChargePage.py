@@ -24,7 +24,7 @@ class SingleCoursePlanChargePage(WebUI):
     coefficient_loc=(By.XPATH, "//input[@id='coefficient']")#折算系数
     setingSelectTeacher_loc=(By.XPATH, "//input[@id='timeSearch']")#按时间查询可用老师
     allTeacher_loc=(By.XPATH, "//a[@ng-click='showTeacherList(detail)']")#选择"全部老师"
-    singleTeacher_loc=(By.XPATH, "//a[text()='陈雪薇']")#选择单个老师
+    singleTeacher_loc=(By.XPATH, "//a[text()='自动化教']")#选择单个老师
     radiomultiPlan_loc=(By.XPATH, "//div[@ng-click='checkedShowCycle('week')'/input']")#选择定制排课时间规则
     radioSinglePlan_loc=(By.XPATH, "//div[@ng-click='checkedShowCycle('day')'/input']")#选择精准日期排课
     clickAddTime_loc = (By.XPATH, "//a[@ng-click='showAddCoursePlanTime()']")  # 点击添加日期
@@ -50,7 +50,7 @@ class SingleCoursePlanChargePage(WebUI):
         self.findElement(*self.timeToday_loc).click()
         self.wait
     def getChangeTabField(self):
-        self.findElement(*self.changeTab_loc).click()
+        ActionChains(self.driver).click(self.findElement(*self.changeTab_loc)).perform()
         self.wait
     def getOrderNoField(self):
         self.findElement(*self.orderNo).text
@@ -172,7 +172,7 @@ class SingleCoursePlanChargePage(WebUI):
         self.getStartLenField(2)
         self.getTimeOkField()
         startValue = '2012-06-21'
-        endValue = '2012-06-21'
+        endValue = '2013-06-21'
         startTime=self.getPTimeStartField(startValue)
         endTime=self.getPTimeEndField(endValue)
         self.driver.execute_script(startTime)
