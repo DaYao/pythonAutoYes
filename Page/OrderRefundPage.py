@@ -21,7 +21,7 @@ class OrderRefundPage(WebUI):
     refundOk = (By.XPATH, "//button[@ng-click='auditRefund()']")  # 确认退款
     refundOkConfirm = (By.XPATH, "//button[@class='confirm']")  # 确定
 
-    def testRefund(self):#订单退费
+    def Refund(self):#订单退费
         click =self.findElement(*self.refundButton)
         ActionChains(self.driver).click(click).perform()
         self.wait
