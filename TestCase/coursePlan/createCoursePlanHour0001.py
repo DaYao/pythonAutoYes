@@ -33,7 +33,7 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
     def testHourCoursePlan60_001(self):
         logging.info("-------通过学员管理入口进入排课------")
         #数据初始化,新增学员教师
-        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1006)')
         studentName='自动化学员'+returnNum
         teacherName='自动化教师'+returnNum
         driver=self.driver
@@ -73,7 +73,7 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
 
     @unittest.skip('test')
     def testHourCoursePlan60_002(self):
-        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1006)')
         studentName='自动化学员'+returnNum
         teacherName='自动化教师'+returnNum
         driver=self.driver
@@ -102,7 +102,7 @@ class StudentHourCoursePlan60(BaseLogin,SingleCoursePlanHourPage):
         myDB.connect_function(myDB,'func_del_autoInsertStudent('+returnNum+')')
     #@unittest.skip('test')
     def testHourCoursePlan60_003(self):
-        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1)')
+        returnNum=myDB.connect_function(myDB,'func_autoInsertStudent(1006)')
         studentName='自动化学员'+returnNum
         teacherName='自动化教师'+returnNum
         driver=self.driver
