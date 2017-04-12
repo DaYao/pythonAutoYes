@@ -17,7 +17,7 @@ class ChargeBackPage(WebUI):
     BackButton = (By.XPATH, "//button[@ng-click='refund()']")  # 退单按钮
     confirmButton = (By.XPATH, "//button[@class='confirm']")  # 确认退单
 
-    def testChargeBack(self):
+    def ChargeBack(self):
         '''click = self.driver.find_element_by_xpath("//a[contains(text(),'首页')]")
         ActionChains(self.driver).click(click).perform()
         self.wait1
@@ -48,4 +48,7 @@ class ChargeBackPage(WebUI):
 
         self.findElement(*self.confirmButton).click()
         self.wait5
+        valitext = self.driver.find_element_by_xpath("//h2[contains(text(),'操作成功')]").text
+        context_expxcted = "操作成功"
+        self.assertEqual(context_expxcted, valitext)
         self.findElement(*self.confirmButton).click()
