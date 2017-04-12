@@ -12,10 +12,15 @@ from model.pyMysqlDB import myDB
 
 class ActivityChargeTest(BaseLogin,ActivityChargePage,HomePage):
 
-    studentChargeName = '自动化学员1490258994'
-
     def testActivityCharge(self):#添加活动消课
-        self.ActivityCharge(self.studentChargeName)
-        self.ActivityChargeVerify(self.studentChargeName)
+        returnNum = myDB.connect_function(myDB, 'func_autoInsertStudent(1)')
+        studentChargeName = '自动化学员' + returnNum
+
+        self.ActivityCharge(studentChargeName)
+        self.ActivityChargeVerify(studentChargeName)
+        self.ActivitySumCharge(studentChargeName)
+        self.ActivityChargeReverse(studentChargeName)
+
+        myDB.connect_function(myDB, 'func_del_autoInsertStudent(' + returnNum + ')')
 if __name__ == '__main__':
     unittest.main(verbosity=2)
