@@ -10,6 +10,9 @@ import unittest
 from .BaseLoginPage import BaseLogin
 from .BasePage import WebUI
 import datetime
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import  By
 
 class VerifyOrderPage(WebUI):
     studentName = (By.XPATH, "//input[@ng-model='orderFilter.name']")  # 学员姓名
@@ -21,21 +24,21 @@ class VerifyOrderPage(WebUI):
     verifyButton = (By.XPATH,"//button[@ng-click='allPayOrder()']")#审核通过
     confirmButton = (By.XPATH,"//button[@class='confirm']")#确认审核通过
 
-    def testVerifyOrder(self,ddnumber):
+    def VerifyOrder(self,ddnumber):
         click = self.driver.find_element_by_xpath("//a[contains(text(),'首页')]")
         ActionChains(self.driver).click(click).perform()
-        self.wait1
-        self.driver.find_element_by_link_text("普通订单列表").click()
         self.wait5
+        self.driver.find_element_by_link_text("普通订单列表").click()
+        self.wait10
 
         click = self.findElement(*self.selectMore)
         ActionChains(self.driver).click(click).perform()
-        self.wait
+        self.wait5
 
         self.findElement(*self.orderNo).send_keys(ddnumber)
         self.wait1
         self.findElement(*self.queryButton).click()
-        self.wait5
+        self.wait10
         click = self.findElement(*self.orperateButton)
         ActionChains(self.driver).click(click).perform()
         self.wait1
@@ -48,4 +51,7 @@ class VerifyOrderPage(WebUI):
         self.wait5
         self.findElement(*self.confirmButton).click()
         self.wait5
+        valitext = self.driver.find_element_by_xpath("//h2[contains(text(),'操作成功')]").text
+        context_expxcted = "操作成功"
+        self.assertEqual(context_expxcted, valitext)
         self.findElement(*self.confirmButton).click()
