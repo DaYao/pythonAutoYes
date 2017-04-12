@@ -6,7 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from .BasePage import WebUI
 import datetime
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import  By
 
 class CreateStudentOrderPage(WebUI):
     orderID = (By.XPATH,"//*[@id = 'orderNo']")#合同编号
@@ -37,7 +39,7 @@ class CreateStudentOrderPage(WebUI):
         self.driver.execute_script(tTime)
 
 
-    def TestAddOrder(self,contranctID):#添加订单
+    def AddOrder(self,contranctID):#添加订单
 
         self.findElement(*self.orderID).send_keys(contranctID)
         self.findElement(*self.type).send_keys('续费')
@@ -58,7 +60,12 @@ class CreateStudentOrderPage(WebUI):
         click = self.driver.find_element_by_xpath("//button[@ng-click='selectCourse()']")
         ActionChains(self.driver).click(click).perform()
 
-        self.wait1
+        self.wait5
+        '''try:
+            WebDriverWait(self.driver, 10, 0.2).until(EC.presence_of_element_located(By.XPATH, "//label[@class='checkbox-bg']"))
+        except Exception as e:
+            self.driver.get_screenshot_as_file('../Report/image/checkbox.png')
+            # logging.error("找不到【添加订单时选择课程】元素")'''
         self.driver.find_elements_by_xpath("//label[@class='checkbox-bg']").pop(1).click()
 
         self.findElement(*self.selectSubject).click()
@@ -108,4 +115,7 @@ class CreateStudentOrderPage(WebUI):
 
         self.findElement(*self.saveOrder).click()
         self.wait1
+        valitext = self.driver.find_element_by_xpath("//h2[contains(text(),'操作成功')]").text
+        context_expxcted = "操作成功"
+        self.assertEqual(context_expxcted, valitext)
         self.findElement(*self.saveConfirm).click()
