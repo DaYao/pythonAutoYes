@@ -93,6 +93,18 @@ class CreateGroupPage(WebUI):
         self.getOkField()
         return HomePage(self.driver)
 
+    def createSelectGroup1(self, groupName, orderRule, groupType, studentName, studentPhone, grade):
+        self.getGroupNameField(groupName)
+        self.getOrderRuleField(orderRule)
+        self.getGroupTypField(groupType)
+        self.getStudentNameField(studentName)
+        self.getStudentPhoneField(studentPhone)
+        self.getGradeId_locField(grade)
+        self.getSelectStudent01Field()
+        self.getSubmitButtonField()
+        self.getOkField()
+        return HomePage(self.driver)
+
 if __name__=='__main__':
     pass
    # createGroupPage.createGroup("班组新增",1,2)
